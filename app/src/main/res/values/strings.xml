@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="button_false">Fałsz</string>
+    <string name="button_true">Prawda</string>
+    <string name="button_next">Następne</string>
+    <string name="q_1">1+1=2</string>
+    <string name="q_2">15+6=22</string>
+    <string name="q_3">33/11=3</string>
+    <string name="q_4">8%2=1</string>
+    <string name="q_5">2**2=4</string>
+    <string name="correct_answer">Brawo</string>
+    <string name="incorrect_answer">Boooo!</string>
+</resources>
