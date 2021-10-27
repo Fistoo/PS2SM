@@ -3,21 +3,24 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String QUIZ_TAG = "MainActivity";
     private Button trueButton;
     private Button falseButton;
     private Button nextButton;
     private TextView questionTextView;
     private int currentindex = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(QUIZ_TAG,"Wywołana została metoda cyklu życia on_Create");
         setContentView(R.layout.activity_main);
         trueButton = findViewById(R.id.true_button);
         falseButton = findViewById(R.id.false_button);
@@ -48,6 +51,32 @@ public class MainActivity extends AppCompatActivity {
         });
         setNextQuestion();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+                Log.d(QUIZ_TAG,"Wywołana została metoda cyklu życia onStart ");
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+                Log.d(QUIZ_TAG,"Wywołana została metoda cyklu życia onResume ");
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+                Log.d(QUIZ_TAG,"Wywołana została metoda cyklu życia onPause");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+                Log.d(QUIZ_TAG,"Wywołana została metoda cyklu życia onStop ");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+                Log.d(QUIZ_TAG,"Wywołana została metoda cyklu życia onDestroy");
     }
 
     private void setNextQuestion() {
