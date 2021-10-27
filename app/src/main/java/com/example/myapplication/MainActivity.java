@@ -49,7 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
         promptBotton.setOnClickListener((v) -> {
-
+            Intent intent = new Intent(MainActivity.this, PromptActivity.class);
+            boolean correctAnswer = questions[currentindex].isTrueAnswer();
+            intent.putExtra(KEY_EXTRA_ANSWER, correctAnswer);
+            startActivity(intent);
         });
         falseButton.setOnClickListener(new View.OnClickListener() {
 
