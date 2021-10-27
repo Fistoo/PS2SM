@@ -15,11 +15,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Czy na pewno chcesz zobaczyć odpowiedź?" />
+            android:text="@string/czy_na_pewno_chcesz_zobaczy_odpowied" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pokaż odpowiedź"/>
+            android:text="@string/poka_odpowied"/>
+        <TextView
+            android:padding="30dp"
+            android:id="@+id/answer_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Odpowiedź"/>
 
     </LinearLayout>
 

@@ -24,7 +24,8 @@
             android:text="@string/button_true"
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp">
         </Button>
         <Button
             android:text="@string/button_false"
@@ -39,4 +40,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </Button>
+    <Button
+        android:layout_marginTop="20dp"
+        android:text="@string/podpowiedz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hint">
+    </Button>
+
 </LinearLayout>

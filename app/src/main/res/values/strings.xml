@@ -10,4 +10,7 @@
     <string name="q_5">2**2=4</string>
     <string name="correct_answer">Brawo</string>
     <string name="incorrect_answer">Boooo!</string>
+    <string name="czy_na_pewno_chcesz_zobaczy_odpowied">Czy na pewno chcesz zobaczyć odpowiedź?</string>
+    <string name="poka_odpowied">Pokaż odpowiedź</string>
+    <string name="podpowiedz">podpowiedz</string>
 </resources>
