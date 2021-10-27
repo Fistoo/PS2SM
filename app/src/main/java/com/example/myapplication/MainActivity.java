@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String QUIZ_TAG = "MainActivity";
     private static final String KEY_CURRENT_INDEX = "currentIndex";
     public static final String KEY_EXTRA_ANSWER = "com.example.myapplication.PromptActivity.correctAnswer";
+    private static  final int REQUEST_CODE_PROMPT = 0;
+    boolean answerWasShow;
     private Button trueButton;
     private Button falseButton;
     private Button nextButton;
@@ -48,12 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        promptBotton.setOnClickListener((v) -> {
-            Intent intent = new Intent(MainActivity.this, PromptActivity.class);
-            boolean correctAnswer = questions[currentindex].isTrueAnswer();
-            intent.putExtra(KEY_EXTRA_ANSWER, correctAnswer);
-            startActivity(intent);
-        });
+
         falseButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -66,10 +64,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentindex = (currentindex + 1) % questions.length;
+                answerWasShow = false;
                 setNextQuestion();
             }
         });
         setNextQuestion();
+
+        promptBotton.setOnClickListener((v) -> {
+            Intent intent = new Intent(MainActivity.this, PromptActivity.class);
+            boolean correctAnswer = questions[currentindex].isTrueAnswer();
+            intent.putExtra(KEY_EXTRA_ANSWER, correctAnswer);
+            startActivityForResult(intent, REQUEST_CODE_PROMPT);
+
+        });
+            nextButton.setOnClickListener((v)->{
+                currentindex = (currentindex + 1) % questions.length;
+                answerWasShow = false;
+                setNextQuestion();
+            });
 
     }
 
@@ -102,7 +114,15 @@ public class MainActivity extends AppCompatActivity {
     private void setNextQuestion() {
         questionTextView.setText(questions[currentindex].getQuestionId());
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK){return;}
+        if(requestCode == REQUEST_CODE_PROMPT){
+           if(data ==  null){return;}
+           answerWasShow = data.getBooleanExtra(PromptActivity.KEY_EXTRA_ANSWER_SHOW, false);
+        }
+    }
 
     private Question [] questions = new Question[]{
             new Question(R.string.q_1,true),
@@ -114,10 +134,14 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswerCorrectness(boolean userAnswer){
         boolean correctAnswer = questions[currentindex].isTrueAnswer();
         int resultMessageId = 0;
-        if(userAnswer == correctAnswer){
-            resultMessageId = R.string.correct_answer;
-        }else{
-            resultMessageId = R.string.incorrect_answer;
+        if(answerWasShow){
+            resultMessageId = R.string.answer_was_shown;
+        }else {
+            if (userAnswer == correctAnswer) {
+                resultMessageId = R.string.correct_answer;
+            } else {
+                resultMessageId = R.string.incorrect_answer;
+            }
         }
         Toast.makeText(this,resultMessageId,Toast.LENGTH_SHORT).show();
 
